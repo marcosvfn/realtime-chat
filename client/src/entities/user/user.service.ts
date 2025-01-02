@@ -6,7 +6,7 @@ import {
   UserRegisterResponseDto,
 } from "@/entities/user";
 
-import { IHttpClient } from "@/shared/http";
+import { HttpMethod, IHttpClient } from "@/shared/http";
 
 export interface IUserService {
   register: (user: UserRegisterRequestDto) => Promise<UserRegisterResponseDto>;
@@ -15,17 +15,28 @@ export interface IUserService {
 }
 
 export class UserService implements IUserService {
-  constructor(http: IHttpClient) {}
+  constructor(private readonly httpClient: IHttpClient) {}
 
   async register(user: UserRegisterRequestDto): Promise<UserRegisterResponseDto> {
-    return {} as UserRegisterResponseDto;
+    return this.httpClient.sendRequest<UserRegisterResponseDto>({
+      endpoint: "/singup",
+      method: HttpMethod.POST,
+      body: user,
+    });
   }
 
   async login(user: UserLoginRequestDto): Promise<UserLoginResponseDto> {
-    return {} as UserLoginResponseDto;
+    return this.httpClient.sendRequest<UserLoginResponseDto>({
+      endpoint: "/login",
+      method: HttpMethod.POST,
+      body: user,
+    });
   }
 
   async logout(): Promise<UserLogoutResponseDto> {
-    return {} as UserLogoutResponseDto;
+    return this.httpClient.sendRequest<UserLogoutResponseDto>({
+      endpoint: "/logout",
+      method: HttpMethod.GET,
+    });
   }
 }

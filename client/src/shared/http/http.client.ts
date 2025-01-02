@@ -3,10 +3,14 @@ import axios, { AxiosError, AxiosInstance } from "axios";
 import { HttpRequest, IHttpClient } from "@/shared/http/http.contract";
 
 export class HttpClient implements IHttpClient {
-  constructor(
+  private constructor(
     private apiInstance: AxiosInstance = axios,
     private baseUrl: string = "http://localhost:8080"
   ) {}
+
+  static create() {
+    return new HttpClient();
+  }
 
   async sendRequest<TResponse, TBody>(props: HttpRequest<TBody>): Promise<TResponse> {
     const { endpoint, method, body, header } = props;
