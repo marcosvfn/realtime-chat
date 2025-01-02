@@ -1,0 +1,28 @@
+{
+  "trailingComma": "es5",
+  "semi": true,
+  "tabWidth": 2,
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "printWidth": 100,
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^(?!.*[.]css$)[./].*$",
+    "",
+    "/assets/(.*)$",
+    "",
+    "^@/app/(.*)$",
+    "",
+    "^@/features/(.*)$",
+    "",
+    "^@/entities/(.*)$",
+    "",
+    "^@/shared/(.*)$",
+    "",
+    "^antd",
+    "",
+    "^@fortawesome/(.*)$"
+  ],
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+  "importOrderTypeScriptVersion": "5.0.0"
+}
