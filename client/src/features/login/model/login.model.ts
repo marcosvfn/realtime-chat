@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DefaultError, useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { LoginFormSchema, LoginModelProps, LoginSchema } from "@/features/login";
@@ -12,6 +13,7 @@ import { useToast } from "@/shared/hooks/use-toast";
 
 export function useLoginModel({ userService }: LoginModelProps) {
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<LoginFormSchema>({
     resolver: zodResolver(LoginSchema),
@@ -28,6 +30,7 @@ export function useLoginModel({ userService }: LoginModelProps) {
   >({
     mutationFn: (data) => userService.login(data),
     onSuccess: () => {
+      router.push("/rooms");
       toast({
         title: "User logged in successfully.",
         description: "You are ready to chat with other users.",

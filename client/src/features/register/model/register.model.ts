@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DefaultError, useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { RegisterFormSchema, RegisterModelProps, RegisterSchema } from "@/features/register";
@@ -12,6 +13,7 @@ import { useToast } from "@/shared/hooks/use-toast";
 
 export function useRegisterModel({ userService }: RegisterModelProps) {
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<RegisterFormSchema>({
     resolver: zodResolver(RegisterSchema),
@@ -29,6 +31,7 @@ export function useRegisterModel({ userService }: RegisterModelProps) {
   >({
     mutationFn: (data) => userService.register(data),
     onSuccess: () => {
+      router.replace("?state=login");
       toast({
         title: "User registered successfully.",
         description: "You can now login with your new account.",
