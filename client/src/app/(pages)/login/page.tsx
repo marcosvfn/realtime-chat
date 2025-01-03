@@ -1,5 +1,5 @@
-import ClientTest from "@/app/(pages)/login/client";
+import { LoginModule } from "@/features/login";
 
 export default function LoginPage() {
-  return <ClientTest />;
+  return <LoginModule />;
 }
