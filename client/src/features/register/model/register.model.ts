@@ -1,6 +1,5 @@
 "use client";
 
-import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DefaultError, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -8,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { RegisterFormSchema, RegisterModelProps, RegisterSchema } from "@/features/register";
 
 import { UserRegisterRequestDto, UserRegisterResponseDto } from "@/entities/user";
+
+import { useToast } from "@/shared/hooks/use-toast";
 
 export function useRegisterModel({ userService }: RegisterModelProps) {
   const { toast } = useToast();

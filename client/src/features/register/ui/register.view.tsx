@@ -1,6 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { RegisterModelMethods } from "@/features/register";
+
+import { Button } from "@/shared/components/ui/button";
 import {
   Form,
   FormControl,
@@ -9,10 +11,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-
-import { RegisterModelMethods } from "@/features/register";
+} from "@/shared/components/ui/form";
+import { Input } from "@/shared/components/ui/input";
 
 export default function RegisterView(methods: RegisterModelMethods) {
   const { form, onSubmit, isPending } = methods;
