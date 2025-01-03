@@ -1,24 +1,23 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 import { HttpRequest, IHttpClient } from "@/shared/http/http.contract";
 
 export class HttpClient implements IHttpClient {
-  private constructor(
+  constructor(
     private apiInstance: AxiosInstance = axios,
     private baseUrl: string = "http://localhost:8080"
   ) {}
 
-  static create() {
-    return new HttpClient();
-  }
-
   async sendRequest<TResponse, TBody>(props: HttpRequest<TBody>): Promise<TResponse> {
-    const { endpoint, method, body, header } = props;
-    const requestConfig: Record<string, unknown> = {
+    const { endpoint, method, body, headers } = props;
+    const requestConfig: AxiosRequestConfig = {
       method,
       url: this.baseUrl + endpoint,
       data: body,
-      headers: header,
+      headers: {
+        "Content-Type": "application/json",
+        ...headers,
+      },
     };
 
     try {

@@ -3,6 +3,7 @@ package router
 import (
 	"server/internal/user"
 	"server/internal/ws"
+	"server/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,6 +12,8 @@ var r *gin.Engine
 
 func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 	r = gin.Default()
+
+	r.Use(middleware.CORS())
 
 	r.POST("/signup", userHandler.CreateUser)
 	r.POST("/login", userHandler.Login)

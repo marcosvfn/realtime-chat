@@ -18,15 +18,15 @@ export class UserService implements IUserService {
   constructor(private readonly httpClient: IHttpClient) {}
 
   async register(user: UserRegisterRequestDto): Promise<UserRegisterResponseDto> {
-    return this.httpClient.sendRequest<UserRegisterResponseDto>({
-      endpoint: "/singup",
+    return this.httpClient.sendRequest<UserRegisterResponseDto, UserRegisterRequestDto>({
+      endpoint: "/signup",
       method: HttpMethod.POST,
       body: user,
     });
   }
 
   async login(user: UserLoginRequestDto): Promise<UserLoginResponseDto> {
-    return this.httpClient.sendRequest<UserLoginResponseDto>({
+    return this.httpClient.sendRequest<UserLoginResponseDto, UserLoginRequestDto>({
       endpoint: "/login",
       method: HttpMethod.POST,
       body: user,

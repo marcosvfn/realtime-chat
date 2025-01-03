@@ -1,15 +1,15 @@
 "use client";
 
-import { RegisterView } from "@/features/register";
+import { RegisterView, useRegisterModel } from "@/features/register";
+
+import { UserService } from "@/entities/user";
+
+import { HttpClient } from "@/shared/http";
 
 export default function RegisterViewModel() {
-  // const httpClient = HttpClient.create();
-  // const userService = new UserService(httpClient);
-  // const methods = useRegisterModel({ userService });
+  const httpClient = new HttpClient();
+  const userService = new UserService(httpClient);
+  const methods = useRegisterModel({ userService });
 
-  return (
-    <div className="bg-white text-red-700 text-5xl">
-      <RegisterView />
-    </div>
-  );
+  return <RegisterView {...methods} />;
 }

@@ -6,7 +6,7 @@ import "./globals.css";
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
   subsets: ["latin"],
-  weight: "400",
+  weight: "500",
 });
 
 export const metadata: Metadata = {

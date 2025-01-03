@@ -9,7 +9,7 @@ export type HttpRequest<TBody> = {
   endpoint: string;
   method: HttpMethod;
   body?: TBody;
-  header?: Record<string, string>;
+  headers?: Record<string, string>;
 };
 
 export interface IHttpClient {
