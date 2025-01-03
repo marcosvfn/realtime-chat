@@ -14,6 +14,7 @@ export class HttpClient implements IHttpClient {
       method,
       url: this.baseUrl + endpoint,
       data: body,
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         ...headers,
