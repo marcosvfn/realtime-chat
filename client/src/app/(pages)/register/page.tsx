@@ -1,5 +1,5 @@
-import { RegisterViewModel } from "@/features/register";
+import { RegisterModule } from "@/features/register";
 
 export default function RegisterPage() {
-  return <RegisterViewModel />;
+  return <RegisterModule />;
 }

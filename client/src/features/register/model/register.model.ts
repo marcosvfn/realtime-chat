@@ -12,7 +12,6 @@ import { useToast } from "@/shared/hooks/use-toast";
 
 export function useRegisterModel({ userService }: RegisterModelProps) {
   const { toast } = useToast();
-
   const form = useForm<RegisterFormSchema>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -35,6 +34,7 @@ export function useRegisterModel({ userService }: RegisterModelProps) {
     onSuccess: () => {
       toast({
         title: "User registered successfully.",
+        description: "You can now login with your new account.",
       });
     },
     onError: (error) => {

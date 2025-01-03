@@ -20,7 +20,11 @@ export default function RegisterView(methods: RegisterModelMethods) {
   return (
     <div className="flex flex-col gap-5 w-full items-center justify-center font-sans">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-lg w-full p-5">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4 max-w-lg w-full p-5"
+          data-testid="register-form"
+        >
           <FormField
             control={form.control}
             name="username"
@@ -31,7 +35,7 @@ export default function RegisterView(methods: RegisterModelMethods) {
                   <Input {...field} />
                 </FormControl>
                 <FormDescription>This is your public display name.</FormDescription>
-                <FormMessage />
+                <FormMessage data-testid="register-username-error" />
               </FormItem>
             )}
           />
@@ -45,7 +49,7 @@ export default function RegisterView(methods: RegisterModelMethods) {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage data-testid="register-email-error" />
               </FormItem>
             )}
           />
@@ -59,7 +63,7 @@ export default function RegisterView(methods: RegisterModelMethods) {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage data-testid="register-password-error" />
               </FormItem>
             )}
           />
