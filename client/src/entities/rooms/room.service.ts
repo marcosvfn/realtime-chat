@@ -8,11 +8,14 @@ export interface IRoomService {
 }
 
 export class RoomService implements IRoomService {
-  constructor(private httpClient: IHttpClient) {}
+  constructor(
+    private httpClient: IHttpClient,
+    private wsClient: IHttpClient
+  ) {}
 
   async createRoom(body: CreateRoomDtoRequest): Promise<CreateRoomDtoResponse> {
     return this.httpClient.sendRequest({
-      endpoint: "/ws/rooms",
+      endpoint: "/ws/create-room",
       method: HttpMethod.POST,
       body,
     });
@@ -20,7 +23,14 @@ export class RoomService implements IRoomService {
 
   async getRooms(): Promise<Array<RoomDto>> {
     return this.httpClient.sendRequest<Array<RoomDto>>({
-      endpoint: "/ws/rooms",
+      endpoint: "/ws/get-rooms",
+      method: HttpMethod.GET,
+    });
+  }
+
+  async joinRoom(roomId: string): Promise<void> {
+    return this.wsClient.sendRequest({
+      endpoint: `/ws/join-room/${roomId}`,
       method: HttpMethod.GET,
     });
   }

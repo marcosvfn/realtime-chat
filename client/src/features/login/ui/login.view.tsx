@@ -1,5 +1,7 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
+
 import { LoginModelMethods } from "@/features/login";
 
 import { Button } from "@/shared/components/ui/button";
@@ -44,7 +46,7 @@ export default function LoginView(methods: LoginModelMethods) {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} type="password" />
               </FormControl>
               <FormMessage data-testid="register-password-error" />
             </FormItem>
@@ -52,7 +54,7 @@ export default function LoginView(methods: LoginModelMethods) {
         />
 
         <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending ? "Loading..." : "Login"}
+          {isPending ? <Loader2 className="animate-spin" /> : "Login"}
         </Button>
       </form>
     </Form>

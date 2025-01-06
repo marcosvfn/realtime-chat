@@ -1,5 +1,7 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
+
 import { RegisterModelMethods } from "@/features/register";
 
 import { Button } from "@/shared/components/ui/button";
@@ -68,7 +70,7 @@ export default function RegisterView(methods: RegisterModelMethods) {
         />
 
         <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending ? "Loading..." : "Register"}
+          {isPending ? <Loader2 className="animate-spin" /> : "Register"}
         </Button>
       </form>
     </Form>
