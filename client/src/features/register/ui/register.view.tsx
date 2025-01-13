@@ -62,7 +62,7 @@ export default function RegisterView(methods: RegisterModelMethods) {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} type="password" />
               </FormControl>
               <FormMessage data-testid="register-password-error" />
             </FormItem>

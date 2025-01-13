@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DefaultError, useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { setCookie } from "nookies";
 import { useForm } from "react-hook-form";
 
 import { LoginFormSchema, LoginModelProps, LoginSchema } from "@/features/login";
@@ -32,7 +31,9 @@ export function useLoginModel({ userService }: LoginModelProps) {
     mutationFn: (data) => userService.login(data),
     onSuccess: (data) => {
       router.push("/rooms");
-      setCookie(null, "user", JSON.stringify(data), { path: "/", maxAge: 60 * 60 * 24 * 30 });
+
+      localStorage.setItem("user", JSON.stringify(data));
+
       toast({
         title: "User logged in successfully.",
         description: "You are ready to chat with other users.",

@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DefaultError, useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { parseCookies } from "nookies";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
@@ -22,8 +21,7 @@ export function useHubModel({ roomService }: HubModelProps) {
   const { toast } = useToast();
   const { setConnection } = useWebSocket();
   const router = useRouter();
-  const cookies = parseCookies();
-  const { username, id: userId } = JSON.parse(cookies.user) as Partial<UserDto>;
+  const userInfo = localStorage.getItem("user");
 
   const form = useForm<CreateRoomFormSchema>({
     resolver: zodResolver(CreateRoomSchema),
@@ -67,13 +65,19 @@ export function useHubModel({ roomService }: HubModelProps) {
   });
 
   const joinRoom = (roomId: string) => {
+    if (!userInfo) {
+      return router.push("/");
+    }
+
+    const { id, username } = JSON.parse(userInfo) as Partial<UserDto>;
+
     const wsConnection = new WebSocket(
-      WS_URL + `/ws/join-room/${roomId}?userId=${userId}&username=${username}`
+      WS_URL + `/ws/join-room/${roomId}?userId=${id}&username=${username}`
     );
 
     if (wsConnection.OPEN) {
       setConnection(wsConnection);
-      router.push("/chat");
+      router.push(`/chat/${roomId}`);
     }
   };
 
